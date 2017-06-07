@@ -1,0 +1,35 @@
+<div class="send-feedback btn btn-default-lt" [ngClass]="{hidden: isHidden}">
+  <!--- SEND FEEDBACK -->
+  <div *ngIf="!isScreenshotMode" (click)="openFeedbackModal()">
+    {{configuration.feedbackButtonText ? configuration.feedbackButtonText : "Send Feedback"}}
+    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+  </div>
+  <!--- /SEND FEEDBACK -->
+  <!-- SCREENSHOT OPTIONS -->
+  <div *ngIf="isScreenshotMode">
+    <span>Options</span>
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-primary btn-feedback col-xs-12"
+                [attr.disabled]="isLoading ? true : null"
+                (click)="takeScreenshot()"
+                [ngClass]="{'m-progress': isLoading}">
+          {{configuration.takeScreenshotButtonText ? configuration.takeScreenshotButtonText : "Take Screenshot"}}
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-default btn-feedback col-xs-12"
+                [attr.disabled]="isLoading ? true : null"
+                (click)="cancelScreenshot()">
+          {{configuration.cancelScreenshotButtonText ? configuration.cancelScreenshotButtonText : "Cancel"}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- /SCREENSHOT OPTIONS -->
+</div>
+<adsh-feedback-modal [configuration]="configuration">
+  <ng-content></ng-content>
+</adsh-feedback-modal>

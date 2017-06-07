@@ -1,0 +1,14 @@
+<label class="btn btn-primary btn-block">
+  <span class="glyphicon glyphicon-open"></span>
+  {{configuration.uploadButtonText ? configuration.uploadButtonText : "Upload"}}
+  <input type="file" style="display: none" (change)="addScreenshot($event)">
+</label>
+<button class="btn btn-info btn-block" type="button" (click)="enterScreenshotMode()">
+  <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+  {{configuration.enterScreenshotModeButtonText ? configuration.enterScreenshotModeButtonText : "Take Screenshot"}}
+</button>
+<div *ngFor="let screenshot of screenshots; let id = index" class="feedback-screenshot">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="remove(id)"><span aria-hidden="true">&times;</span></button>
+  <img *ngIf="screenshot" [src]="screenshot" alt="{{id}}"/>
+</div>
+

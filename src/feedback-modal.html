@@ -1,0 +1,20 @@
+<modal title="{{configuration.feedbackModalTitle ? configuration.feedbackModalTitle : 'Send Feedback'}}"
+        modalClass="modal-md"
+        [hideCloseButton]="true"
+        [closeOnEscape]="false"
+        [closeOnOutsideClick]="false">
+  <modal-header></modal-header>
+  <modal-content>
+    <form novalidate #userFeedbackForm>
+      <ng-content></ng-content>
+    </form>
+  </modal-content>
+  <modal-footer>
+    <button class="btn btn-default" data-dismiss="modal" type="button" (click)="closeModal()">
+      {{configuration.cancelFeedbackButtonText ? configuration.cancelFeedbackButtonText : "Cancel"}}
+    </button>
+    <button class="btn btn-primary" type="button" (click)="submit(userFeedbackForm)">
+      {{configuration.submitFeedbackButtonText ? configuration.submitFeedbackButtonText : "Submit"}}
+    </button>
+  </modal-footer>
+</modal>
