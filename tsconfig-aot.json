@@ -6,13 +6,13 @@
     "experimentalDecorators": true,
     "strictNullChecks": false,
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "es2015",
     "moduleResolution": "node",
     "paths": {
       "@angular/core": ["node_modules/@angular/core"],
       "rxjs/*": ["node_modules/rxjs/*"]
     },
-    "rootDir": "src",
+    "rootDir": "build/inlined",
     "outDir": "build/dist",
     "sourceMap": true,
     "inlineSources": true,
@@ -24,7 +24,7 @@
     ]
   },
   "files": [
-    "src/index.ts"
+    "build/inlined/index.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "build/factories",
