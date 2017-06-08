@@ -10,7 +10,7 @@ const HIGHLIGHT_CLASS = "feedback-highlight";
 const FEEDBACK_BTN_CLASS = "btn-feedback";
 
 @Component({
-  selector: "adsh-feedback-screenshot",
+  selector: "ngx-bootstrap-feedback-screenshot",
   templateUrl: "./feedback-screenshot.html",
 })
 export class FeedbackScreenshotComponent {

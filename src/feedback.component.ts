@@ -4,7 +4,7 @@ import {FeedbackService} from "./feedback.service";
 import {FeedbackConfiguration} from "./feedback-configuration.model";
 
 @Component({
-  selector: "adsh-feedback",
+  selector: "ngx-bootstrap-feedback",
   templateUrl: "./feedback.html"
 })
 export class FeedbackComponent {

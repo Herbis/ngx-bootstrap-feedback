@@ -5,7 +5,7 @@ import {FeedbackConfiguration} from "./feedback-configuration.model";
 import {FeedbackModel} from "./feedback.model";
 
 @Component({
-  selector: "adsh-feedback-modal",
+  selector: "ngx-bootstrap-feedback-modal",
   templateUrl: "./feedback-modal.html"
 })
 export class FeedbackModalComponent {
