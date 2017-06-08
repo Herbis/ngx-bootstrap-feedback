@@ -11,7 +11,7 @@ const FEEDBACK_BTN_CLASS = "btn-feedback";
 
 @Component({
   selector: "ngx-bootstrap-feedback-screenshot",
-  templateUrl: "./feedback-screenshot.html",
+  templateUrl: "./feedback-screenshot.component.html",
 })
 export class FeedbackScreenshotComponent {
 

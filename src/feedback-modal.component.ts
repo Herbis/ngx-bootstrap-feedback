@@ -6,7 +6,7 @@ import {FeedbackModel} from "./feedback.model";
 
 @Component({
   selector: "ngx-bootstrap-feedback-modal",
-  templateUrl: "./feedback-modal.html"
+  templateUrl: "./feedback-modal.component.html"
 })
 export class FeedbackModalComponent {
 

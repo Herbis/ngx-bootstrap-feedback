@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-feedback",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "description": "Feedback modal powered by bootstrap for your Angular application.",
   "main": "./bundles/ngx-bootstrap-feedback.umd.js",
   "private": true,
@@ -9,8 +9,7 @@
     "@herbis/ngx-modal": "^0.1.0",
     "rxjs": "^5.0.1"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular/common": "^4.1.3",
     "@angular/compiler": "^4.1.3",
@@ -22,6 +21,10 @@
     "codelyzer": "~2.0.0",
     "copyfiles": "^1.2.0",
     "rollup": "^0.42.0",
+    "rollup-plugin-alias": "^1.3.1",
+    "rollup-plugin-angular": "^0.4.4",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
     "rxjs": "^5.0.1",
     "tslint": "4.5.0",
     "typescript": "^2.3.4",
@@ -35,7 +38,7 @@
     "minify": "uglifyjs build/dist/bundles/ngx-bootstrap-feedback.umd.js --screw-ie8 --compress --mangle --comments --output build/dist/bundles/ngx-bootstrap-feedback.umd.min.js",
     "prebuild": "npm run clean",
     "build": "npm run lint && npm run transpile && npm run package && npm run minify",
-    "postbuild": "copyfiles package.json README.md build/dist",
+    "postbuild": "copyfiles -f src/**/*.html package.json README.md build/dist",
     "lint": "tslint src/**/*.ts",
     "prepublishBeta": "npm run build",
     "publishBeta": "npm publish build/dist --tag beta"

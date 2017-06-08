@@ -5,7 +5,7 @@ import {FeedbackConfiguration} from "./feedback-configuration.model";
 
 @Component({
   selector: "ngx-bootstrap-feedback",
-  templateUrl: "./feedback.html"
+  templateUrl: "./feedback.component.html"
 })
 export class FeedbackComponent {
 
