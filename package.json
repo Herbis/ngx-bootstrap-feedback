@@ -19,8 +19,11 @@
     "@angular/platform-browser": "^4.1.3",
     "@angular/router": "^4.1.3",
     "@herbis/ngx-modal": "^0.1.0",
+    "codelyzer": "~2.0.0",
+    "copyfiles": "^1.2.0",
     "rollup": "^0.42.0",
     "rxjs": "^5.0.1",
+    "tslint": "4.5.0",
     "typescript": "^2.3.4",
     "uglify-js": "^3.0.15",
     "zone.js": "^0.8.11"
@@ -30,8 +33,12 @@
     "transpile": "ngc",
     "package": "rollup -c",
     "minify": "uglifyjs build/dist/bundles/ngx-bootstrap-feedback.umd.js --screw-ie8 --compress --mangle --comments --output build/dist/bundles/ngx-bootstrap-feedback.umd.min.js",
-    "build": "npm run transpile && npm run package && npm run minify",
-    "prebuild": "npm run clean"
+    "prebuild": "npm run clean",
+    "build": "npm run lint && npm run transpile && npm run package && npm run minify",
+    "postbuild": "copyfiles package.json README.md build/dist",
+    "lint": "tslint src/**/*.ts",
+    "prepublishBeta": "npm run build",
+    "publishBeta": "npm publish build/dist --tag beta"
   },
   "repository": {
     "type": "git",
@@ -48,5 +55,6 @@
   "bugs": {
     "url": "https://github.com/Herbis/ngx-bootstrap-feedback/issues"
   },
-  "homepage": "https://github.com/Herbis/ngx-bootstrap-feedback#readme"
+  "homepage": "https://github.com/Herbis/ngx-bootstrap-feedback#readme",
+  "types": "feedback.module.d.ts"
 }
