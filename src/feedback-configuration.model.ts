@@ -22,7 +22,20 @@ export class FeedbackConfiguration {
   takeScreenshotButtonText?: string;
   uploadButtonText?: string;
 
+  /* Styles */
+  cancelFeedbackButtonClass?: string;
+  cancelScreenshotButtonClass?: string;
+  enterScreenshotModeButtonClass?: string;
+  feedbackButtonClass?: string;
+  feedbackModalClass?: string;
+  screenshotEmbedClass?: string;
+  screenshotEmbedRemoveButtonClass?: string;
+  submitFeedbackButtonClass?: string;
+  takeScreenshotButtonClass?: string;
+  uploadButtonClass?: string;
+
   /* Other options. */
+  enableLoadingIconClass?: boolean;
   screenshotOnlyHighlighted?: boolean;
 
 }

@@ -1,4 +1,4 @@
-<div class="send-feedback btn btn-default-lt" [ngClass]="{hidden: isHidden}">
+<div [attr.class]="configuration.feedbackButtonClass ? configuration.feedbackButtonClass : 'send-feedback-button btn'" [ngClass]="{hidden: isHidden}">
   <!--- SEND FEEDBACK -->
   <div *ngIf="!isScreenshotMode" (click)="openFeedbackModal()">
     {{configuration.feedbackButtonText ? configuration.feedbackButtonText : "Send Feedback"}}
@@ -10,17 +10,17 @@
     <span>Options</span>
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-primary btn-feedback col-xs-12"
+        <button [attr.class]="'btn-feedback ' + (configuration.takeScreenshotButtonClass ? configuration.takeScreenshotButtonClass : 'btn btn-primary btn-block')"
                 [attr.disabled]="isLoading ? true : null"
                 (click)="takeScreenshot()"
-                [ngClass]="{'m-progress': isLoading}">
+                [ngClass]="{'loading-icon': configuration.enableLoadingIconClass ? isLoading : false}">
           {{configuration.takeScreenshotButtonText ? configuration.takeScreenshotButtonText : "Take Screenshot"}}
         </button>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-default btn-feedback col-xs-12"
+        <button [attr.class]="'btn-feedback ' + (configuration.cancelScreenshotButtonClass ? configuration.cancelScreenshotButtonClass : 'btn btn-default btn-block')"
                 [attr.disabled]="isLoading ? true : null"
                 (click)="cancelScreenshot()">
           {{configuration.cancelScreenshotButtonText ? configuration.cancelScreenshotButtonText : "Cancel"}}

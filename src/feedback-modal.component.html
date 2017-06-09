@@ -1,5 +1,5 @@
 <modal title="{{configuration.feedbackModalTitle ? configuration.feedbackModalTitle : 'Send Feedback'}}"
-        modalClass="modal-md"
+        modalClass="{{configuration.feedbackModalClass ? configuration.feedbackModalClass : 'modal-md'}}"
         [hideCloseButton]="true"
         [closeOnEscape]="false"
         [closeOnOutsideClick]="false">
@@ -10,10 +10,10 @@
     </form>
   </modal-content>
   <modal-footer>
-    <button class="btn btn-default" data-dismiss="modal" type="button" (click)="closeModal()">
+    <button [attr.class]="configuration.cancelFeedbackButtonClass ? configuration.cancelFeedbackButtonClass : 'btn btn-default'" data-dismiss="modal" type="button" (click)="closeModal()">
       {{configuration.cancelFeedbackButtonText ? configuration.cancelFeedbackButtonText : "Cancel"}}
     </button>
-    <button class="btn btn-primary" type="button" (click)="submit(userFeedbackForm)">
+    <button [attr.class]="configuration.submitFeedbackButtonClass ? configuration.submitFeedbackButtonClass : 'btn btn-primary'" type="button" (click)="submit(userFeedbackForm)">
       {{configuration.submitFeedbackButtonText ? configuration.submitFeedbackButtonText : "Submit"}}
     </button>
   </modal-footer>

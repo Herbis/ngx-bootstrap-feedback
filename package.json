@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-feedback",
-  "version": "1.0.0-alpha8",
+  "version": "1.0.0-alpha9",
   "description": "Feedback modal powered by bootstrap for your Angular application.",
   "main": "./bundles/ngx-bootstrap-feedback.umd.js",
   "private": true,

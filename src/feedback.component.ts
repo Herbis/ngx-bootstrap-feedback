@@ -9,7 +9,7 @@ import {FeedbackConfiguration} from "./feedback-configuration.model";
     @keyframes slide {
           100% { bottom: 0; }
     }
-    .send-feedback {
+    .send-feedback-button {
         animation: slide 0.3s forwards;
         bottom: -40px;
         right: 56px;
@@ -20,6 +20,9 @@ import {FeedbackConfiguration} from "./feedback-configuration.model";
         text-align: center;
         z-index: 9001;
         cursor: pointer;
+        color: #fff;
+        background-color: #8E979F;
+        border: transparent;
     }`],
   templateUrl: "./feedback.component.html"
 })
