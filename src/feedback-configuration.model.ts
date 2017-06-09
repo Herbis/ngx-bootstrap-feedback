@@ -36,6 +36,8 @@ export class FeedbackConfiguration {
 
   /* Other options. */
   enableLoadingIconClass?: boolean;
+  disableScreenshotMode?: boolean;
+  disableUpload?: boolean;
   screenshotOnlyHighlighted?: boolean;
 
 }

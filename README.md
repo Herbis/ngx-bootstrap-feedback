@@ -3,7 +3,7 @@
 
 *Heavily inspired by [angular-bootstrap-feedback](https://github.com/RobertYoung/angular-bootstrap-feedback).*
 
-### Requirements:
+## Requirements:
 ```
 "bootstrap": "^3.3.7",`
 "@angular/core": "^2.4.0 || ^4.0.0",
@@ -24,7 +24,8 @@ You will also need have the following scripts added in your application (*.angul
 ```
 > * Optionals are only required for 'Take Screenshot' feature.
 
-## Options
+## Configuration
+### Configuration Options
 #### Event callbacks
 |Event|Description|Emits|
 |:--------|:-------------|------:|
@@ -66,4 +67,6 @@ You will also need have the following scripts added in your application (*.angul
 |Property|Description|Default|
 |:-------------|:----------------------|-------:|
 |enableLoadingIconClass|Apply *loading-icon* class to capture screenshot button when capturing.|*false*|
+|disableScreenshotMode|Disable capture screenshot mode.|*false*|
+|disableUpload|Disable ability to upload a screenshot.|*false*|
 |screenshotOnlyHighlighted|Capture screenshot only of the highlighted area.|*false*|
