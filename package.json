@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-feedback",
-  "version": "1.0.0-alpha4",
+  "version": "1.0.0-alpha8",
   "description": "Feedback modal powered by bootstrap for your Angular application.",
   "main": "./bundles/ngx-bootstrap-feedback.umd.js",
   "private": true,
@@ -21,11 +21,13 @@
     "@herbis/ngx-modal": "^0.1.0",
     "codelyzer": "~2.0.0",
     "copyfiles": "^1.2.0",
+    "mkdirp": "^0.5.1",
     "ng2-inline-template": "^0.1.1",
     "rollup": "^0.42.0",
     "rxjs": "^5.0.1",
     "tslint": "4.5.0",
     "typescript": "^2.3.4",
+    "uglifycss": "^0.0.27",
     "uglify-js": "^3.0.15",
     "zone.js": "^0.8.11"
   },
@@ -35,13 +37,15 @@
     "pretranspile": "npm run inline",
     "transpile": "ngc -p tsconfig-aot.json",
     "package": "rollup -c",
-    "minify": "uglifyjs build/dist/bundles/ngx-bootstrap-feedback.umd.js --screw-ie8 --compress --mangle --comments --output build/dist/bundles/ngx-bootstrap-feedback.umd.min.js",
+    "minifyjs": "uglifyjs build/package/bundles/ngx-bootstrap-feedback.umd.js --screw-ie8 --compress --mangle --comments --output build/package/bundles/ngx-bootstrap-feedback.umd.min.js",
+    "preminifycss": "mkdirp build/package/dist/css",
+    "minifycss": "uglifycss --ugly-comments assets/css/feedback-take-screenshot.css --output build/package/dist/css/feedback-take-screenshot.min.css",
     "prebuild": "npm run clean",
-    "build": "npm run lint && npm run transpile && npm run package && npm run minify",
-    "postbuild": "copyfiles package.json README.md build/dist",
+    "build": "npm run lint && npm run transpile && npm run package && npm run minifyjs && npm run minifycss",
+    "postbuild": "copyfiles package.json README.md build/package",
     "lint": "tslint src/**/*.ts",
     "prepublishBeta": "npm run build",
-    "publishBeta": "npm publish build/dist --tag beta"
+    "publishBeta": "npm publish build/package --tag beta"
   },
   "repository": {
     "type": "git",

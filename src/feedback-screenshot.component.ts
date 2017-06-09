@@ -11,6 +11,14 @@ const FEEDBACK_BTN_CLASS = "btn-feedback";
 
 @Component({
   selector: "ngx-bootstrap-feedback-screenshot",
+  styles: [`
+    .feedback-screenshot img {
+      width: 100%;
+      border: 2px solid #EBEBEB;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+  `],
   templateUrl: "./feedback-screenshot.component.html",
 })
 export class FeedbackScreenshotComponent {
@@ -73,7 +81,7 @@ export class FeedbackScreenshotComponent {
    * @param y the y-axis movement position.
    */
   private adjustDrawing(x: number, y: number): void {
-    if (this.isDrawing) {
+    if (this.isDrawing && this.canvasContext) {
       const width = x - this.centerX;
       const height = y - this.centerY;
 
@@ -153,6 +161,10 @@ export class FeedbackScreenshotComponent {
    * @param y the y-axis page position to finish at.
    */
   private finishDrawing(x: number, y: number): void {
+    if (!this.canvasContext) {
+      return;
+    }
+
     this.isDrawing = false;
 
     const width = x - this.centerX;
@@ -246,6 +258,9 @@ export class FeedbackScreenshotComponent {
    * Redraw the canvas context.
    */
   private redraw(): void {
+    if (!this.canvasContext) {
+        return;
+    }
     let highlights = document.getElementsByClassName(HIGHLIGHT_CLASS);
 
     for (let i = 0; i < highlights.length; i++) {
@@ -317,6 +332,10 @@ export class FeedbackScreenshotComponent {
    * @param y the y-axis page position to start at.
    */
   private startDrawing(x: number, y: number): void {
+    if (!this.canvasContext) {
+        return;
+    }
+
     this.centerX = x;
     this.centerY = y;
 
@@ -346,6 +365,10 @@ export class FeedbackScreenshotComponent {
     };
 
     /* Create a canvas from body, and create an image out of it. */
-    html2canvas(document.body, options);
+    if (html2canvas) {
+      html2canvas(document.body, options);
+    } else {
+      console.error("html2canvas not initialized. Please add it to your project or disable 'Take Screenshot' functionality.");
+    }
   }
 }

@@ -1,6 +1,6 @@
 export default {
-    entry: 'build/dist/index.js',
-    dest: 'build/dist/bundles/ngx-bootstrap-feedback.umd.js',
+    entry: 'build/package/index.js',
+    dest: 'build/package/bundles/ngx-bootstrap-feedback.umd.js',
     sourceMap: false,
     format: 'umd',
     moduleName: 'ngx.bootstrap.feedback',

@@ -13,7 +13,7 @@
       "rxjs/*": ["node_modules/rxjs/*"]
     },
     "rootDir": "src",
-    "outDir": "build/dist",
+    "outDir": "build/package",
     "sourceMap": true,
     "inlineSources": true,
     "target": "es5",
@@ -23,15 +23,7 @@
       "dom"
     ]
   },
-  "files": [
-    "src/index.ts"
-  ],
-  "angularCompilerOptions": {
-    "genDir": "build/factories",
-    "strictMetadataEmit": true
-  },
-  "exclude": [
-    "build",
-    "node_modules"
+  "include": [
+    "src/**/*.ts"
   ]
 }

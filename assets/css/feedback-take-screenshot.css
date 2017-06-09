@@ -1,0 +1,9 @@
+#feedback-canvas {
+    cursor: crosshair;
+    z-index: 9000;
+    position: absolute;
+}
+
+.wait {
+    cursor: wait !important;
+}

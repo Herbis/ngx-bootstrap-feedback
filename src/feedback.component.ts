@@ -4,7 +4,23 @@ import {FeedbackService} from "./feedback.service";
 import {FeedbackConfiguration} from "./feedback-configuration.model";
 
 @Component({
-  selector: "ngx-bootstrap-feedback",
+  selector: "ngx-bootstrap-feedback", 
+  styles: [`
+    @keyframes slide {
+          100% { bottom: 0; }
+    }
+    .send-feedback {
+        animation: slide 0.3s forwards;
+        bottom: -40px;
+        right: 56px;
+        position: fixed;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        font-size: 12px;
+        text-align: center;
+        z-index: 9001;
+        cursor: pointer;
+    }`],
   templateUrl: "./feedback.component.html"
 })
 export class FeedbackComponent {
