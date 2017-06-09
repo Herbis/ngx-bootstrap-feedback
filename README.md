@@ -26,15 +26,15 @@ You will also need have the following scripts added in your application (*.angul
 
 ## Options
 #### Event callbacks
-|Event|Description|
-|:--------|:-------------|
-|onCancel|Fired when the feedback is canceled from the modal.|
-|onCancelScreenshot|Fired when canceling from the screenshot mode.|
-|onEnterTakeScreenshot|Fired when entering screenshot mode.|
-|onHighlightDrawn|Fired when a highlight is drawn in the screenshot mode.|
-|onOpen|Fired when the feedback modal is opened.|
-|onScreenshotTaken|Fired when a screenshot is taken by the user.|
-|onSubmit|Fired when the user submits feedback from the modal.|
+|Event|Description|Emits|
+|:--------|:-------------|------:|
+|onCancel|Fired when the feedback is canceled from the modal.|-|
+|onCancelScreenshot|Fired when canceling from the screenshot mode.|-|
+|onEnterTakeScreenshot|Fired when entering screenshot mode.|-|
+|onHighlightDrawn|Fired when a highlight is drawn in the screenshot mode.|highlight: HTMLDivElement|
+|onOpen|Fired when the feedback modal is opened.|-|
+|onScreenshotTaken|Fired when a screenshot is taken by the user.|screenshot: string (base64 data url)|
+|onSubmit|Fired when the user submits feedback from the modal.|feedbackSubmission: FeedbackModel|
 
 #### Text properties
 |Property|Description|Default|
