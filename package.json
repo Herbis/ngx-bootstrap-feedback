@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-feedback",
-  "version": "1.0.0-alpha9",
+  "version": "1.0.0-beta1",
   "description": "Feedback modal powered by bootstrap for your Angular application.",
   "main": "./bundles/ngx-bootstrap-feedback.umd.js",
   "private": true,
@@ -45,7 +45,9 @@
     "postbuild": "copyfiles package.json README.md build/package",
     "lint": "tslint src/**/*.ts",
     "prepublishBeta": "npm run build",
-    "publishBeta": "npm publish build/package --tag beta"
+    "publishBeta": "npm publish build/package --tag beta",
+    "prepublishOut": "npm run build",
+    "publishOut": "npm publish build/package"
   },
   "repository": {
     "type": "git",
