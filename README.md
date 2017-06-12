@@ -8,7 +8,7 @@ This module provides a modal popup *(powered by bootstrap)* for collecting user 
 * Customizable form body.
 * Configurable [styles](#configuration-style-properties), [text](#configuration-text-properties), [callbacks](#configuration-event-callbacks).
 * Optional screenshot taking and / or uploading functionality.
-* Configurable allowed image types (for uploading).
+* Configurable allowed image types and size (for uploading).
 
 *Heavily inspired by [angular-bootstrap-feedback](https://github.com/RobertYoung/angular-bootstrap-feedback).*
 
