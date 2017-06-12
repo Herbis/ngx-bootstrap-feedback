@@ -18,6 +18,7 @@ export class FeedbackConfiguration {
   enterScreenshotModeButtonText?: string;
   feedbackButtonText?: string;
   feedbackModalTitle?: string;
+  fileSizeTooLargeErrorMessage?: string;
   fileTypeNotAllowedErrorMessage?: string;
   submitFeedbackButtonText?: string;
   takeScreenshotButtonText?: string;
@@ -41,6 +42,7 @@ export class FeedbackConfiguration {
   enableLoadingIconClass?: boolean;
   disableScreenshotMode?: boolean;
   disableUpload?: boolean;
+  maxSingleFileSize?: number;
   screenshotOnlyHighlighted?: boolean;
 
 }

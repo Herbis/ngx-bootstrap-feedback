@@ -149,7 +149,8 @@ this.feedbackConfiguration = {
 |enterScreenshotModeButtonText|The enter screenshot mode button text.|*Take Screenshot*|
 |feedbackButtonText|The feedback button text.|*Send Feedback*|
 |feedbackModalTitle|The title of the modal.|*Send Feedback*|
-|fileTypeNotAllowedErrorMessage|Error message shown when uploading unsupported file type.|*File type {type} not allowed.*|
+|fileSizeTooLargeErrorMessage|Error message shown when uploading a single file that's too large. {size} - file size, {maxsize} - max size.|*File size too large. Max allowed - {maxsize}.*|
+|fileTypeNotAllowedErrorMessage|Error message shown when uploading unsupported file type. {type} - file MIME type.|*File type {type} not allowed.*|
 |submitFeedbackButtonText|The submit button text of the modal.|*Submit*|
 |takeScreenshotButtonText|The capture screenshot button text in screenshot mode.|*Take Screenshot*|
 |uploadButtonText|The upload screenshot button text.|*Upload*|
@@ -176,6 +177,7 @@ this.feedbackConfiguration = {
 |enableLoadingIconClass|Apply *loading-icon* class to capture screenshot button when capturing.|*false*|
 |disableScreenshotMode|Disable capture screenshot mode.|*false*|
 |disableUpload|Disable ability to upload a screenshot.|*false*|
+|maxSingleFileSize|Max single file size (in KB) allowed.|*2048*|
 |screenshotOnlyHighlighted|Capture screenshot only of the highlighted area.|*false*|
 
 

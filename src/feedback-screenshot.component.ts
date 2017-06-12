@@ -9,6 +9,7 @@ const CANVAS_ID = "feedback-canvas";
 const HIGHLIGHT_CLASS = "feedback-highlight";
 const FEEDBACK_BTN_CLASS = "btn-feedback";
 const DEFAULT_ALLOWED_IMAGE_TYPES = "image/png image/gif image/jpeg";
+const DEFAULT_SINGLE_FILE_MAX_SIZE = 2048;
 
 @Component({
   selector: "ngx-bootstrap-feedback-screenshot",
@@ -64,26 +65,17 @@ export class FeedbackScreenshotComponent {
    * @param event the event of selecting image.
    */
   public addScreenshot(event: any): void {
-    this.uploadErrorMessage = null;
-
     let reader = new FileReader();
     let file = event.target.files[0];
 
-    if (file) {
-      /* Make sure file type alowed*/
-      if (this.checkIsUploadedFileAllowed(file)) {
-        reader.onload = (evnt: any) => {
+    if (file && this.checkIsUploadFileAllowed(file)) {
+      reader.onload = (evnt: any) => {
 
-          this.screenshots.push(evnt.target.result);
-          this.changeDetection.detectChanges();
-          event.target.value = "";
-        };
-        reader.readAsDataURL(file);
-      } else {
-        let errorMessageTemplate = this.configuration.fileTypeNotAllowedErrorMessage ?
-          this.configuration.fileTypeNotAllowedErrorMessage : "File type {type} not allowed.";
-        this.uploadErrorMessage = errorMessageTemplate.replace("{type}", file.type);
-      }
+        this.screenshots.push(evnt.target.result);
+        this.changeDetection.detectChanges();
+        event.target.value = "";
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -114,15 +106,54 @@ export class FeedbackScreenshotComponent {
   }
 
   /**
-   * Check if uploaded file is allowed.
+   * Check if upload file is allowed.
    * @param file the file.
    * @return {boolean} wheter allowed or not.
    */
-  private checkIsUploadedFileAllowed(file: File): boolean {
+  private checkIsUploadFileAllowed(file: File): boolean {
+    this.uploadErrorMessage = null;
+
     let allowedTypes = this.configuration.allowedImageTypes ?
       this.configuration.allowedImageTypes.split(" ") : DEFAULT_ALLOWED_IMAGE_TYPES.split(" ");
 
-    return allowedTypes.indexOf(file.type) !== -1;
+    let maxSingleFileSize = this.configuration.maxSingleFileSize ?
+      this.configuration.maxSingleFileSize : DEFAULT_SINGLE_FILE_MAX_SIZE;
+
+    let fileSizeKb = file.size / 1024;
+
+
+    if (allowedTypes.indexOf(file.type) === -1) { // File type not allowed
+      let errorMessageTemplate = this.configuration.fileTypeNotAllowedErrorMessage ?
+        this.configuration.fileTypeNotAllowedErrorMessage : "File type {type} not allowed.";
+      this.uploadErrorMessage = errorMessageTemplate.replace("{type}", file.type);
+
+      return false;
+    } else if (fileSizeKb > maxSingleFileSize) { // File size too large
+      let errorMessageTemplate = this.configuration.fileSizeTooLargeErrorMessage ?
+        this.configuration.fileSizeTooLargeErrorMessage : "File size too large. Max allowed - {maxsize}.";
+
+      /* Format max size string. */
+      let maxSizeString;
+      if (fileSizeKb >= 1024) {
+        maxSizeString = (maxSingleFileSize / 1024).toFixed(2) + "MB";
+      } else {
+        maxSizeString = maxSingleFileSize.toFixed(2) + "KB";
+      }
+
+      /* Format file size string. */
+      let fileSizeString;
+      if (fileSizeKb >= 1024) {
+        fileSizeString = (fileSizeKb / 1024).toFixed(2) + "MB";
+      } else {
+        fileSizeString = fileSizeKb.toFixed(2) + "KB";
+      }
+
+      this.uploadErrorMessage = errorMessageTemplate.replace("{maxsize}", maxSizeString).replace("{size}", fileSizeString);
+
+      return false;
+    } else {
+      return true;
+    }
   }
 
   /**
@@ -159,7 +190,6 @@ export class FeedbackScreenshotComponent {
     for (let i = 0; i < highlights.length; i++) {
       let highlight = highlights[i];
       highlight.remove();
-
     }
 
     this.canvasContext = null;
