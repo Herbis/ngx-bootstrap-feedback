@@ -18,6 +18,7 @@ export class FeedbackConfiguration {
   enterScreenshotModeButtonText?: string;
   feedbackButtonText?: string;
   feedbackModalTitle?: string;
+  fileTypeNotAllowedErrorMessage?: string;
   submitFeedbackButtonText?: string;
   takeScreenshotButtonText?: string;
   uploadButtonText?: string;
@@ -33,8 +34,10 @@ export class FeedbackConfiguration {
   submitFeedbackButtonClass?: string;
   takeScreenshotButtonClass?: string;
   uploadButtonClass?: string;
+  uploadErrorMessageClass?: string;
 
   /* Other options. */
+  allowedImageTypes?: string;
   enableLoadingIconClass?: boolean;
   disableScreenshotMode?: boolean;
   disableUpload?: boolean;

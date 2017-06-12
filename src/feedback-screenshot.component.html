@@ -3,6 +3,7 @@
   {{configuration.uploadButtonText ? configuration.uploadButtonText : "Upload"}}
   <input type="file" style="display: none" (change)="addScreenshot($event)">
 </label>
+<p *ngIf="uploadErrorMessage" [attr.class]="configuration.uploadErrorMessageClass ? configuration.uploadErrorMessageClass : 'text-danger'">{{uploadErrorMessage}}</p>
 <button *ngIf="!configuration.disableScreenshotMode" [attr.class]="configuration.enterScreenshotModeButtonClass ? configuration.enterScreenshotModeButtonClass : 'btn btn-info btn-block'" type="button" (click)="enterScreenshotMode()">
   <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
   {{configuration.enterScreenshotModeButtonText ? configuration.enterScreenshotModeButtonText : "Take Screenshot"}}

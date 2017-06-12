@@ -8,6 +8,7 @@ declare let html2canvas: any;
 const CANVAS_ID = "feedback-canvas";
 const HIGHLIGHT_CLASS = "feedback-highlight";
 const FEEDBACK_BTN_CLASS = "btn-feedback";
+const DEFAULT_ALLOWED_IMAGE_TYPES = "image/png image/gif image/jpeg";
 
 @Component({
   selector: "ngx-bootstrap-feedback-screenshot",
@@ -40,6 +41,7 @@ export class FeedbackScreenshotComponent {
   private highlightWidth: number;
   private highlightHeight: number;
   private preRenderScrollPosition: number;
+  private uploadErrorMessage: string;
 
   constructor(private changeDetection: ChangeDetectorRef, private feedback: FeedbackService) {
     feedback.screenshotComponent = this;
@@ -62,17 +64,27 @@ export class FeedbackScreenshotComponent {
    * @param event the event of selecting image.
    */
   public addScreenshot(event: any): void {
+    this.uploadErrorMessage = null;
+
     let reader = new FileReader();
     let file = event.target.files[0];
-    if (file) {
-      reader.onload = (evnt: any) => {
-        this.screenshots.push(evnt.target.result);
-        this.changeDetection.detectChanges();
-        event.target.value = "";
-      };
-      reader.readAsDataURL(file);
-    }
 
+    if (file) {
+      /* Make sure file type alowed*/
+      if (this.checkIsUploadedFileAllowed(file)) {
+        reader.onload = (evnt: any) => {
+
+          this.screenshots.push(evnt.target.result);
+          this.changeDetection.detectChanges();
+          event.target.value = "";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        let errorMessageTemplate = this.configuration.fileTypeNotAllowedErrorMessage ?
+          this.configuration.fileTypeNotAllowedErrorMessage : "File type {type} not allowed.";
+        this.uploadErrorMessage = errorMessageTemplate.replace("{type}", file.type);
+      }
+    }
   }
 
   /**
@@ -99,6 +111,18 @@ export class FeedbackScreenshotComponent {
   public clearScreenshots(): void {
     this.screenshots = [];
     this.changeDetection.detectChanges();
+  }
+
+  /**
+   * Check if uploaded file is allowed.
+   * @param file the file.
+   * @return {boolean} wheter allowed or not.
+   */
+  private checkIsUploadedFileAllowed(file: File): boolean {
+    let allowedTypes = this.configuration.allowedImageTypes ?
+      this.configuration.allowedImageTypes.split(" ") : DEFAULT_ALLOWED_IMAGE_TYPES.split(" ");
+
+    return allowedTypes.indexOf(file.type) !== -1;
   }
 
   /**
