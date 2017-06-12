@@ -1,9 +1,9 @@
-<label *ngIf="!configuration.disableScreenshotMode" [attr.class]="configuration.uploadButtonClass ? configuration.uploadButtonClass : 'btn btn-primary btn-block'">
+<label *ngIf="!configuration.disableUpload" [attr.class]="configuration.uploadButtonClass ? configuration.uploadButtonClass : 'btn btn-primary btn-block'">
   <span class="glyphicon glyphicon-open"></span>
   {{configuration.uploadButtonText ? configuration.uploadButtonText : "Upload"}}
   <input type="file" style="display: none" (change)="addScreenshot($event)">
 </label>
-<button *ngIf="!configuration.disableUpload" [attr.class]="configuration.enterScreenshotModeButtonClass ? configuration.enterScreenshotModeButtonClass : 'btn btn-info btn-block'" type="button" (click)="enterScreenshotMode()">
+<button *ngIf="!configuration.disableScreenshotMode" [attr.class]="configuration.enterScreenshotModeButtonClass ? configuration.enterScreenshotModeButtonClass : 'btn btn-info btn-block'" type="button" (click)="enterScreenshotMode()">
   <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
   {{configuration.enterScreenshotModeButtonText ? configuration.enterScreenshotModeButtonText : "Take Screenshot"}}
 </button>
