@@ -11,6 +11,7 @@ export class FeedbackConfiguration {
   onOpen?: Function;
   onScreenshotTaken?: Function;
   onSubmit: Function;
+  onSubmitValidation?: Function;
 
   /* Element text / titles. */
   cancelFeedbackButtonText?: string;
@@ -20,6 +21,7 @@ export class FeedbackConfiguration {
   feedbackModalTitle?: string;
   fileSizeTooLargeErrorMessage?: string;
   fileTypeNotAllowedErrorMessage?: string;
+  maxImageCountReachedErrorMessageText?: string;
   submitFeedbackButtonText?: string;
   takeScreenshotButtonText?: string;
   uploadButtonText?: string;
@@ -30,6 +32,7 @@ export class FeedbackConfiguration {
   enterScreenshotModeButtonClass?: string;
   feedbackButtonClass?: string;
   feedbackModalClass?: string;
+  maxImageCountReachedErrorMessageClass?: string;
   screenshotEmbedClass?: string;
   screenshotEmbedRemoveButtonClass?: string;
   submitFeedbackButtonClass?: string;
@@ -42,6 +45,7 @@ export class FeedbackConfiguration {
   enableLoadingIconClass?: boolean;
   disableScreenshotMode?: boolean;
   disableUpload?: boolean;
+  maxImageCount?: number;
   maxSingleFileSize?: number;
   screenshotOnlyHighlighted?: boolean;
 

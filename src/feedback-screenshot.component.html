@@ -1,13 +1,22 @@
-<label *ngIf="!configuration.disableUpload" [attr.class]="configuration.uploadButtonClass ? configuration.uploadButtonClass : 'btn btn-primary btn-block'">
+<label *ngIf="!configuration.disableUpload"
+       [attr.class]="configuration.uploadButtonClass ? configuration.uploadButtonClass : 'btn btn-primary btn-block'"
+       [attr.disabled]="isMaxImageCountReached() ? true : null">
   <span class="glyphicon glyphicon-open"></span>
   {{configuration.uploadButtonText ? configuration.uploadButtonText : "Upload"}}
-  <input type="file" style="display: none" (change)="addScreenshot($event)">
+  <input *ngIf="!isMaxImageCountReached()" type="file" style="display: none" (change)="addScreenshot($event)">
 </label>
 <p *ngIf="uploadErrorMessage" [attr.class]="configuration.uploadErrorMessageClass ? configuration.uploadErrorMessageClass : 'text-danger'">{{uploadErrorMessage}}</p>
-<button *ngIf="!configuration.disableScreenshotMode" [attr.class]="configuration.enterScreenshotModeButtonClass ? configuration.enterScreenshotModeButtonClass : 'btn btn-info btn-block'" type="button" (click)="enterScreenshotMode()">
+<button *ngIf="!configuration.disableScreenshotMode"
+        [attr.class]="configuration.enterScreenshotModeButtonClass ? configuration.enterScreenshotModeButtonClass : 'btn btn-info btn-block'"
+        [attr.disabled]="isMaxImageCountReached() ? true : null"
+        type="button" (click)="enterScreenshotMode()">
   <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
   {{configuration.enterScreenshotModeButtonText ? configuration.enterScreenshotModeButtonText : "Take Screenshot"}}
 </button>
+<p *ngIf="isMaxImageCountReached()"
+   [attr.class]="configuration.maxImageCountReachedErrorMessageClass ? configuration.maxImageCountReachedErrorMessageClass : 'text-warning'">
+  {{configuration.maxImageCountReachedErrorMessageText ? configuration.maxImageCountReachedErrorMessageText : "Image limit reached. Please remove some to add more."}}
+</p>
 <div *ngFor="let screenshot of screenshots; let id = index" [attr.class]="configuration.screenshotEmbedClass ? configuration.screenshotEmbedClass : 'feedback-screenshot'">
   <button [attr.class]="configuration.screenshotEmbedRemoveButtonClass ? configuration.screenshotEmbedRemoveButtonClass : 'close'"
           data-dismiss="modal" aria-label="Close" type="button"

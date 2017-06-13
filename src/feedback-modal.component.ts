@@ -63,13 +63,19 @@ export class FeedbackModalComponent {
     feedbackSubmission.form = form;
     feedbackSubmission.screenshots = this.feedback.getScreenshots();
 
+    /* Callback on submit validation */
+    if (this.configuration.onSubmitValidation) {
+      if (!this.configuration.onSubmitValidation(feedbackSubmission)) {
+        return; // Do not proceed if validation unsuccessful.
+      }
+    }
+
     /* Callback on submit. */
     if (this.configuration.onSubmit) {
       this.configuration.onSubmit(feedbackSubmission);
+      this.closeModal();
     } else {
       console.warn("No onSubmit callback function configured. It probably should.");
     }
-
-    this.closeModal();
   }
 }

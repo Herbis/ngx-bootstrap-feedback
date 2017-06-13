@@ -139,7 +139,8 @@ this.feedbackConfiguration = {
 |onHighlightDrawn|Fired when a highlight is drawn in the screenshot mode.|highlight: HTMLDivElement|
 |onOpen|Fired when the feedback modal is opened.|-|
 |onScreenshotTaken|Fired when a screenshot is taken by the user.|screenshot: string (base64 data url)|
-|onSubmit|Fired when the user submits feedback from the modal.|feedbackSubmission: FeedbackModel|
+|onSubmit|Fired when the user submits feedback from the modal if onSubmitValidation is successful or not defined.|feedbackSubmission: FeedbackModel|
+|onSubmitValidation|Fired when the user submits feedback but before onSubmit. Expects boolean as return value. onSubmit will not be called if validation fails.|feedbackSubmission: FeedbackModel|
 
 #### <a name="configuration-text-properties">Text properties
 |Property|Description|Default|
@@ -151,6 +152,7 @@ this.feedbackConfiguration = {
 |feedbackModalTitle|The title of the modal.|*Send Feedback*|
 |fileSizeTooLargeErrorMessage|Error message shown when uploading a single file that's too large. {size} - file size, {maxsize} - max size.|*File size too large. Max allowed - {maxsize}.*|
 |fileTypeNotAllowedErrorMessage|Error message shown when uploading unsupported file type. {type} - file MIME type.|*File type {type} not allowed.*|
+|maxImageCountReachedErrorMessageText|Error message shown when max image count has been reached.|*Image limit reached. Please remove some to add more.*|
 |submitFeedbackButtonText|The submit button text of the modal.|*Submit*|
 |takeScreenshotButtonText|The capture screenshot button text in screenshot mode.|*Take Screenshot*|
 |uploadButtonText|The upload screenshot button text.|*Upload*|
@@ -163,6 +165,7 @@ this.feedbackConfiguration = {
 |enterScreenshotModeButtonClass|The class applied to the enter screenshot mode in feedback modal.|*btn btn-info btn-block*|
 |feedbackButtonClass|The class applied to the feedback button.|*btn send-feedback-button*|
 |feedbackModalClass|The class applied to the feedback modal.|*modal-md*|
+|maxImageCountReachedErrorMessageClass|The class applied to the max image count reached error message.|*text-warning*|
 |screenshotEmbedClass|The class applied to embedded captured screenshot.|*feedback-screenshot*|
 |screenshotEmbedRemoveButtonClass|The class applied to embedded captured screenshot remove button.|*close*|
 |submitFeedbackButtonClass|The class applied to the submit button in feedback modal.|*btn btn-primary*|
@@ -177,6 +180,7 @@ this.feedbackConfiguration = {
 |enableLoadingIconClass|Apply *loading-icon* class to capture screenshot button when capturing.|*false*|
 |disableScreenshotMode|Disable capture screenshot mode.|*false*|
 |disableUpload|Disable ability to upload a screenshot.|*false*|
+|maxImageCount|Max image count allowed for submission.|*5*|
 |maxSingleFileSize|Max single file size (in KB) allowed.|*2048*|
 |screenshotOnlyHighlighted|Capture screenshot only of the highlighted area.|*false*|
 

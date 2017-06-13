@@ -10,6 +10,7 @@ const HIGHLIGHT_CLASS = "feedback-highlight";
 const FEEDBACK_BTN_CLASS = "btn-feedback";
 const DEFAULT_ALLOWED_IMAGE_TYPES = "image/png image/gif image/jpeg";
 const DEFAULT_SINGLE_FILE_MAX_SIZE = 2048;
+const DEFAULT_MAX_IMAGE_COUNT_ALLOWED = 5;
 
 @Component({
   selector: "ngx-bootstrap-feedback-screenshot",
@@ -261,6 +262,22 @@ export class FeedbackScreenshotComponent {
     if (this.configuration.onHighlightDrawn) {
       this.configuration.onHighlightDrawn(this.highlight);
     }
+  }
+
+  /**
+   * Get the max image count allowed.
+   * @return {boolean} the count.
+   */
+  public getMaxImageCount(): number {
+    return this.configuration.maxImageCount ? this.configuration.maxImageCount : DEFAULT_MAX_IMAGE_COUNT_ALLOWED;
+  }
+
+  /**
+   * Check whether max image count has been reached.
+   * @return {boolean} whether max image count has been reached.
+   */
+  public isMaxImageCountReached(): boolean {
+    return this.screenshots.length >= this.getMaxImageCount();
   }
 
   /**

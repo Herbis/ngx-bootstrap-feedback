@@ -1,6 +1,8 @@
-<div [attr.class]="configuration.feedbackButtonClass ? configuration.feedbackButtonClass : 'send-feedback-button btn'" [ngClass]="{hidden: isHidden}">
+<div [attr.class]="configuration.feedbackButtonClass ? configuration.feedbackButtonClass : 'send-feedback-button btn'"
+     [ngClass]="{hidden: isHidden}"
+     (click)="isScreenshotMode ? null : openFeedbackModal()">
   <!--- SEND FEEDBACK -->
-  <div *ngIf="!isScreenshotMode" (click)="openFeedbackModal()">
+  <div *ngIf="!isScreenshotMode">
     {{configuration.feedbackButtonText ? configuration.feedbackButtonText : "Send Feedback"}}
     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
   </div>
