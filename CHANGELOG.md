@@ -1,3 +1,10 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.1...1.1.2) (14-06-2017)
+
+#### Bug Fixes
+* Fixed a bug where uploadErrorMessage variable would cause a compile error because of it being private and used from a template.
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.0...1.1.1) (14-06-2017)
 

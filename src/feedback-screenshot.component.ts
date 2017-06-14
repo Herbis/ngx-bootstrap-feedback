@@ -29,6 +29,7 @@ export class FeedbackScreenshotComponent {
   @Input()
   configuration: FeedbackConfiguration;
 
+  uploadErrorMessage: string;
   screenshots: string[] = [];
 
   /* Canvas */
@@ -43,7 +44,6 @@ export class FeedbackScreenshotComponent {
   private highlightWidth: number;
   private highlightHeight: number;
   private preRenderScrollPosition: number;
-  private uploadErrorMessage: string;
 
   constructor(private changeDetection: ChangeDetectorRef, private feedback: FeedbackService) {
     feedback.screenshotComponent = this;
