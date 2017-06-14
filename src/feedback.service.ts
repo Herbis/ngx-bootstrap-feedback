@@ -43,7 +43,7 @@ export class FeedbackService {
    * Hide the feedback modal.
    */
   hideFeedbackModal(): void {
-    this.modalComponent.hideModal();
+    this.modalComponent.closeModal();
   }
 
   /**
@@ -71,7 +71,7 @@ export class FeedbackService {
    * Show feedback modal.
    */
   showFeedbackModal(): void {
-    this.modalComponent.showModal();
+    this.modalComponent.openModal();
   }
 
   /**

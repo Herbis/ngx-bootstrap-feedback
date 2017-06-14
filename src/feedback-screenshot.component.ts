@@ -206,7 +206,7 @@ export class FeedbackScreenshotComponent {
 
     this.feedback.buttonComponent.isHidden = false;
     this.feedback.buttonComponent.isScreenshotMode = true;
-    this.feedback.modalComponent.hideModal();
+    this.feedback.modalComponent.closeModal();
     this.createCanvas();
   }
 

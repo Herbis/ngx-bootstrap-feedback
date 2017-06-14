@@ -10,7 +10,7 @@
     </form>
   </modal-content>
   <modal-footer>
-    <button [attr.class]="configuration.cancelFeedbackButtonClass ? configuration.cancelFeedbackButtonClass : 'btn btn-default'" data-dismiss="modal" type="button" (click)="closeModal()">
+    <button [attr.class]="configuration.cancelFeedbackButtonClass ? configuration.cancelFeedbackButtonClass : 'btn btn-default'" data-dismiss="modal" type="button" (click)="cancel()">
       {{configuration.cancelFeedbackButtonText ? configuration.cancelFeedbackButtonText : "Cancel"}}
     </button>
     <button [attr.class]="configuration.submitFeedbackButtonClass ? configuration.submitFeedbackButtonClass : 'btn btn-primary'" type="button" (click)="submit(userFeedbackForm)">

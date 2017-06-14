@@ -1,8 +1,8 @@
 import {Component, Input, ViewChild} from "@angular/core";
-import {Modal} from "@herbis/ngx-modal";
 import {FeedbackService} from "./feedback.service";
 import {FeedbackConfiguration} from "./feedback-configuration.model";
 import {FeedbackModel} from "./feedback.model";
+import {Modal} from "@herbis/ngx-modal";
 
 @Component({
   selector: "ngx-bootstrap-feedback-modal",
@@ -21,36 +21,29 @@ export class FeedbackModalComponent {
   }
 
   /**
+   * Cancel the feedback.
+   */
+  public cancel(): void {
+    /* Callback on cancel.*/
+    if (this.configuration.onCancel) {
+      this.configuration.onCancel();
+    }
+
+    this.closeModal();
+  }
+
+  /**
    * Close this modal.
    */
   public closeModal(): void {
     this.modal.close();
     this.feedback.showSendFeedbackButton();
-
-    /* Callback on cancel.*/
-    if (this.configuration.onCancel) {
-      this.configuration.onCancel();
-    }
-  }
-
-  /**
-   * Hide this modal.
-   */
-  public hideModal(): void {
-    this.modal.close();
   }
 
   /**
    * Open feedback modal.
    */
   public openModal(): void {
-    this.modal.open();
-  }
-
-  /**
-   * Show this modal.
-   */
-  public showModal(): void {
     this.modal.open();
   }
 

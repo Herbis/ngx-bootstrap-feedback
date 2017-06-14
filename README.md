@@ -49,12 +49,14 @@ You will also need have the following scripts added in your application (*.angul
 ##### <a name="usage-import">Import Feedback module in the required module (usually app root module).
 ```
 import {FeedbackModule} from "ngx-bootstrap-feedback/feedback.module";
+import {ModalModule} from "@herbis/ngx-modal";
 
 @NgModule({
   ...
   imports: [
     ...
     FeedbackModule,
+    ModalModule,
     ...
   ],
   ...
