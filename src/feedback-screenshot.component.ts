@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input} from "@angular/core";
 import {FeedbackService} from "./feedback.service";
 import {FeedbackConfiguration} from "./feedback-configuration.model";
-
+import {DomSanitizer} from "@angular/platform-browser";
 
 declare let html2canvas: any;
 
@@ -29,8 +29,9 @@ export class FeedbackScreenshotComponent {
   @Input()
   configuration: FeedbackConfiguration;
 
-  uploadErrorMessage: string;
+  domSanitizer: DomSanitizer;
   screenshots: string[] = [];
+  uploadErrorMessage: string;
 
   /* Canvas */
   private canvas: HTMLCanvasElement;
@@ -45,7 +46,10 @@ export class FeedbackScreenshotComponent {
   private highlightHeight: number;
   private preRenderScrollPosition: number;
 
-  constructor(private changeDetection: ChangeDetectorRef, private feedback: FeedbackService) {
+  constructor(private changeDetection: ChangeDetectorRef,
+              domSanitizer: DomSanitizer,
+              private feedback: FeedbackService) {
+    this.domSanitizer = domSanitizer;
     feedback.screenshotComponent = this;
   }
 

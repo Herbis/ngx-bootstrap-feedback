@@ -23,6 +23,6 @@
           (click)="remove(id)">
     <span aria-hidden="true">&times;</span>
   </button>
-  <img *ngIf="screenshot" [src]="screenshot" alt="{{id}}"/>
+  <img *ngIf="screenshot" [src]="domSanitizer.bypassSecurityTrustUrl(screenshot)" alt="{{id}}"/>
 </div>
 

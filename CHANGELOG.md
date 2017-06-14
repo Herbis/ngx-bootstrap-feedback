@@ -1,3 +1,10 @@
+<a name="1.1.3"></a>
+## (Pending) [1.1.3](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.2...1.1.3) (xx-06-2017)
+
+#### Bug Fixes
+* Added screenshot data url DOM sanitation, to avoid screenshot not display on some systems.
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.1...1.1.2) (14-06-2017)
 
