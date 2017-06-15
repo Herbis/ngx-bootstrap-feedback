@@ -103,6 +103,17 @@ export class FeedbackScreenshotComponent {
   }
 
   /**
+   * Clear highlight params.
+   */
+  private clearHighlightParams() {
+    this.highlight = null;
+    this.highlightLeft = null;
+    this.highlightTop = null;
+    this.highlightWidth = null;
+    this.highlightHeight = null;
+  }
+
+  /**
    * Clear all screenshots.
    */
   public clearScreenshots(): void {
@@ -125,7 +136,6 @@ export class FeedbackScreenshotComponent {
       this.configuration.maxSingleFileSize : DEFAULT_SINGLE_FILE_MAX_SIZE;
 
     let fileSizeKb = file.size / 1024;
-
 
     if (allowedTypes.indexOf(file.type) === -1) { // File type not allowed
       let errorMessageTemplate = this.configuration.fileTypeNotAllowedErrorMessage ?
@@ -287,8 +297,9 @@ export class FeedbackScreenshotComponent {
   /**
    * Process rendered screenshot.
    * @param canvas the canvas.
+   * @param onlyHighlighted whether to capture only highlighted area.
    */
-  private processRenderedScreenshot(canvas: any): void {
+  private processRenderedScreenshot(canvas: any, onlyHighlighted: boolean): void {
     this.feedback.setScreenshotMode(false);
     this.feedback.showFeedbackModal();
     this.feedback.unlockTakeScreenshotButtons();
@@ -302,7 +313,7 @@ export class FeedbackScreenshotComponent {
     let sizingCanvas: HTMLCanvasElement = null;
 
     /* Handle screenshot highlight case. */
-    if (this.configuration.screenshotOnlyHighlighted) {
+    if (onlyHighlighted) {
       /* Create canvas of highlight area.*/
       sizingCanvas = document.createElement("canvas");
 
@@ -315,13 +326,14 @@ export class FeedbackScreenshotComponent {
 
     setTimeout(() => {
 
-      let screenshotBase64 = this.configuration.screenshotOnlyHighlighted ? sizingCanvas.toDataURL() : canvas.toDataURL();
+      let screenshotBase64 = onlyHighlighted ? sizingCanvas.toDataURL() : canvas.toDataURL();
       this.screenshots.push(screenshotBase64);
-      this.changeDetection.detectChanges();
+      this.changeDetection.detectChanges(); // Detect changes, so that the new screenshot thumbnail shows up.
       document.body.scrollTop = this.preRenderScrollPosition; // Reset scroll.
       document.body.style["overflow"] = null; // Reset scrolling.
       document.body.classList.remove("wait"); // Set body cursor back to normal.
       this.canvas.classList.remove("wait"); // Set canvas cursor back to normal.
+      this.clearHighlightParams(); // Clear highlight params.
 
       if (this.configuration.onScreenshotTaken) {
         this.configuration.onScreenshotTaken(screenshotBase64);
@@ -369,6 +381,17 @@ export class FeedbackScreenshotComponent {
   public remove(index: number): void {
     this.screenshots.splice(index, 1);
     this.changeDetection.detectChanges();
+  }
+
+  /**
+   * Remove transparent background from canvas.
+   */
+  private removeCanvasAlphaBackground(): void {
+    if (!this.canvasContext) {
+      throw Error("User feedback context does not exist");
+    }
+
+    this.canvasContext.clearRect(0, 0, document.body.clientWidth, document.body.clientHeight);
   }
 
   /**
@@ -426,6 +449,11 @@ export class FeedbackScreenshotComponent {
    */
   public takeScreenshot(): void {
 
+    if (!html2canvas) {
+      console.error("html2canvas not initialized. Please add it to your project or disable 'Take Screenshot' functionality.");
+      return;
+    }
+
     this.preRenderScrollPosition = window.pageYOffset;
     document.body.scrollTop = 0; // Scroll to the top.
     document.body.style["overflow"] = "hidden"; // Disable Scroll.
@@ -435,15 +463,19 @@ export class FeedbackScreenshotComponent {
     this.feedback.lockTakeScreenshotButtons();
     FeedbackScreenshotComponent.removeMouseDrawingEvents();
 
+    /* Use sizing canvas if it only highlight screenshoting is configured and if highlight width and height is defined. */
+    let captureOnlyHighlighted = !!(this.configuration.screenshotOnlyHighlighted && this.highlightWidth && this.highlightHeight);
+
+    /* Remove alpha background if highlight width and height undefined. */
+    if (!(this.highlightWidth && this.highlightHeight)) {
+      this.removeCanvasAlphaBackground();
+    }
+
     let options = {
-      onrendered: (canvas: any) => this.processRenderedScreenshot(canvas)
+      onrendered: (canvas: any) => this.processRenderedScreenshot(canvas, captureOnlyHighlighted)
     };
 
     /* Create a canvas from body, and create an image out of it. */
-    if (html2canvas) {
-      html2canvas(document.body, options);
-    } else {
-      console.error("html2canvas not initialized. Please add it to your project or disable 'Take Screenshot' functionality.");
-    }
+    html2canvas(document.body, options);
   }
 }
