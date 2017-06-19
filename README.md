@@ -143,6 +143,7 @@ this.feedbackConfiguration = {
 |onScreenshotTaken|Fired when a screenshot is taken by the user.|screenshot: string (base64 data url)|
 |onSubmit|Fired when the user submits feedback from the modal if onSubmitValidation is successful or not defined.|feedbackSubmission: FeedbackModel|
 |onSubmitValidation|Fired when the user submits feedback but before onSubmit. Expects boolean as return value. onSubmit will not be called if validation fails.|feedbackSubmission: FeedbackModel|
+|onTakeScreenshot|Fired when the user presses button to take a screenshot but before it is actually taken. This can be used to cleanup view to make sure something is included / excluded from the screenshot.|-|
 
 #### <a name="configuration-text-properties">Text properties
 |Property|Description|Default|

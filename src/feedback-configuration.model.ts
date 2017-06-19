@@ -12,6 +12,7 @@ export class FeedbackConfiguration {
   onScreenshotTaken?: Function;
   onSubmit: Function;
   onSubmitValidation?: Function;
+  onTakeScreenshot?: Function;
 
   /* Element text / titles. */
   cancelFeedbackButtonText?: string;

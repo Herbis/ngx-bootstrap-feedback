@@ -449,6 +449,10 @@ export class FeedbackScreenshotComponent {
    */
   public takeScreenshot(): void {
 
+    if (this.configuration.onTakeScreenshot) {
+      this.configuration.onTakeScreenshot();
+    }
+
     if (!html2canvas) {
       console.error("html2canvas not initialized. Please add it to your project or disable 'Take Screenshot' functionality.");
       return;

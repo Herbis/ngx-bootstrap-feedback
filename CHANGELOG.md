@@ -1,3 +1,10 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.3...1.1.4) (19-06-2017)
+
+#### Bug Fixes
+* Added onTakeScreenshot callback, called when the user has clicked to take a screenshot but the screenshot has not been taken yet. Useful for cleaning up or adding info to the screenshot before it's taken.
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.2...1.1.3) (15-06-2017)
 
@@ -6,6 +13,7 @@
 * Fixed a bug when configured with 'only highlighted' and taking an image with no highlight. Now takes a screenshot of the whole page.
 * Fixed a bug where highlight attributes (sizes) would persist on next image, if not highlighted.  
 * Adjusted html2canvas requirement error on 'Take Screenshot' to be thrown earlier to avoid application deadlock.
+
 
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.1.1...1.1.2) (14-06-2017)
@@ -20,6 +28,7 @@
 #### Bug Fixes
 * Fixed a bug where onCancel callback would be called on both submit and cancel actions.
 
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/Herbis/ngx-bootstrap-feedback/compare/1.0.0...1.1.0) (13-06-2017)
 
@@ -28,6 +37,7 @@
 * Added max image count configuration option.
 #### Bug Fixes
 * Fixed send feedback button only opening feedback modal if clicked directly on text.
+
 
 <a name="1.0.0"></a>
 # [1.0.0](github.com/Herbis/ngx-bootstrap-feedback/commits/1.0.0) (12-06-2017)
