@@ -46,6 +46,11 @@ export class FeedbackScreenshotComponent {
   private highlightHeight: number;
   private preRenderScrollPosition: number;
 
+  /* Mouse event listeners. */
+  private mouseDownListener: EventListener;
+  private mouseMoveListener: EventListener;
+  private mouseUpListener: EventListener;
+
   constructor(private changeDetection: ChangeDetectorRef,
               domSanitizer: DomSanitizer,
               private feedback: FeedbackService) {
@@ -397,31 +402,35 @@ export class FeedbackScreenshotComponent {
   /**
    * Remove the mouse drawing events.
    */
-  private static removeMouseDrawingEvents(): void {
-    document.removeEventListener("mousedown");
-    document.removeEventListener("mouseup");
-    document.removeEventListener("mousemove");
+  private removeMouseDrawingEvents(): void {
+    document.removeEventListener("mousedown", this.mouseDownListener);
+    document.removeEventListener("mouseup", this.mouseUpListener);
+    document.removeEventListener("mousemove", this.mouseMoveListener);
   }
 
   /**
    * Setup mouse drawing events.
    */
   private setupMouseDrawingEvents(): void {
-    document.addEventListener("mousedown", (event: any) => {
+    this.mouseDownListener = (event: any) => {
       /* Make sure we don't execute when clicking on feedback buttons. */
       if (!event.target || !event.target.classList.contains(FEEDBACK_BTN_CLASS)) {
         this.startDrawing(event.pageX, event.pageY);
       }
-    });
-    document.addEventListener("mouseup", (event: any) => {
+    };
+
+    this.mouseUpListener = (event: any) => {
       /* Make sure we don't execute when clicking on feedback buttons. */
       if (!event.target || !event.target.classList.contains(FEEDBACK_BTN_CLASS)) {
         this.finishDrawing(event.pageX, event.pageY);
       }
-    });
-    document.addEventListener("mousemove", (event: any) => {
-      this.adjustDrawing(event.pageX, event.pageY);
-    });
+    };
+
+    this.mouseMoveListener = (event: any) => this.adjustDrawing(event.pageX, event.pageY);
+
+    document.addEventListener("mousedown", this.mouseDownListener);
+    document.addEventListener("mouseup", this.mouseUpListener);
+    document.addEventListener("mousemove", this.mouseMoveListener);
   }
 
   /**
@@ -465,7 +474,7 @@ export class FeedbackScreenshotComponent {
     this.canvas.classList.add("wait"); // Set cursor for canvas to wait.
 
     this.feedback.lockTakeScreenshotButtons();
-    FeedbackScreenshotComponent.removeMouseDrawingEvents();
+    this.removeMouseDrawingEvents();
 
     /* Use sizing canvas if it only highlight screenshoting is configured and if highlight width and height is defined. */
     let captureOnlyHighlighted = !!(this.configuration.screenshotOnlyHighlighted && this.highlightWidth && this.highlightHeight);
